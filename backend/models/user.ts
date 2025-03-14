@@ -5,10 +5,10 @@ const userSchema = new Schema({
     lastname:{type: String, require:true},
     email:{ type: String, unique:true },
     login_code:{type: String, length: 6 },
-    role:{
+    role:{type:{
         admin:Boolean,
         seller:Boolean
-    }
+    },require:true}
 })
 
 // nota: tercer parametro es el nombre de la tabla en la db
