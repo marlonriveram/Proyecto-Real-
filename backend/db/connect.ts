@@ -9,21 +9,21 @@ async function connectDB() {
     try {
         await mongoose.connect(process.env.MONGODB_URL)
         console.log('La conexion fue exitosa')
-        const newUser = new userModel({
-            firstname:'Marlon',
-            lastname:'Mosquera',
-            email:'marlon@mail.com',
-            login_code:'123456',
-            role:{
-                admin:true,
-                seller:true
-            }
-        })
+        // const newUser = new userModel({
+        //     firstname:'Marlon',
+        //     lastname:'Mosquera',
+        //     email:'marlon@mail.com',
+        //     login_code:'123456',
+        //     role:{
+        //         admin:true,
+        //         seller:true
+        //     }
+        // })
 
-        console.log(newUser)
-        await newUser.save()
+        // console.log(newUser)
+        // await newUser.save()
     } catch (error) {
-        console.log('Hubo un error al conectarnos a la DB')
+        console.log('Hubo un error al conectarnos a la DB: ',error)
     }
 }
 
