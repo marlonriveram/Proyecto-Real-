@@ -4,14 +4,14 @@ import Link from "next/link";
 import styles from "./index.module.css";
 import { env } from "~/env";
 import { Button } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 
 
 export default function Home() {
 
-  const Demo = () => {
-    return <Button>Button</Button>
-  }
+  const router = useRouter()
+ 
   return (
     <>
       <Head>
@@ -26,7 +26,9 @@ export default function Home() {
           </h1>
 
           <button>Login</button>
-          {Demo()}
+          <Button onClick={() =>{
+            router.push("/login")
+          }}>Button</Button>
 
         </div>
       </main>
