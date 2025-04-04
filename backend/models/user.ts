@@ -12,4 +12,4 @@ const userSchema = new Schema({
 })
 
 // nota: tercer parametro es el nombre de la tabla en la db
-export default model("User", userSchema,"usuarios")
+export default model("User", userSchema,"usuarios") // modelo 

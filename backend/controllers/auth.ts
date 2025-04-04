@@ -1,11 +1,46 @@
-import { Request,Response } from "express"
+import { Request, Response } from "express";
+import sendEmail from "../helpers/mailer";
+import UserModel from "../models/user";
 
-/*Nota: Ts aca no puede inferir los tipos de datos de req y res
-    por lo que se deben definir
-*/
-export const login = async (req: Request,res: Response) =>{
-     res.send('Login')
-}
-export const generateCode = async (req: Request,res:Response) =>{
-    res.send('GenerateCodigo')
-}
+export const login = async (req: Request, res: Response) => {
+    const { email} = req.params
+    const { code } = req.body
+
+    console.log({email,code})
+
+    res.send("Login");
+};
+
+export const generateCode = async (req: Request, res: Response) => {
+    const { email } = req.params;
+
+    // Buscar el usuario en la base de datos
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+        return res.status(404).json({ error: "Usuario no encontrado." });
+    }
+
+    // ----------------- Generar codido aleatoro -------------------
+    let  ramdomCode  = ""
+
+    for (let i = 0; i <= 5; i++) {
+        const number = Math.floor(Math.random() * 10)
+        ramdomCode += number
+    }
+    // --------------------------------------------------------------
+
+    user.login_code = ramdomCode
+    await user.save() // guardar cambios
+
+    // Enviar el correo electrónico
+    await sendEmail({
+        to: email,
+        subject: "Este es tu código: " + ramdomCode,
+        html: "Código para ingresar: " + ramdomCode, // Aquí podrías generar un código dinámico
+    });
+
+    
+
+    res.status(200).json({ message: "Código enviado exitosamente." });
+};
