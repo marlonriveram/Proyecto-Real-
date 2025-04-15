@@ -3,15 +3,16 @@ import Link from "next/link";
 
 import styles from "./index.module.css";
 import { env } from "~/env";
-import { Button } from "@chakra-ui/react";
+import { Button, ButtonGroup } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 
 
 export default function Home() {
 
   const router = useRouter()
- 
+
   return (
     <>
       <Head>
@@ -25,10 +26,24 @@ export default function Home() {
             {env.NEXT_PUBLIC_BACKEND_BASE_URL}
           </h1>
 
-          <button>Login</button>
-          <Button onClick={() =>{
-            router.push("/login")
-          }}>Button</Button>
+          <ButtonGroup>
+            <Button 
+            colorPalette={"blue"}
+            onClick={() => {
+              router.push("/login")
+            }}>Login
+            </Button>
+
+            <Button
+              colorPalette={"green"}
+              onClick={() => {
+                // router.push("/sales")
+                axios.get(`${env.NEXT_PUBLIC_BACKEND_BASE_URL}/sales/`,{withCredentials:true})
+              }}>Get sales
+            </Button>
+          </ButtonGroup>
+
+
 
         </div>
       </main>

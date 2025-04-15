@@ -6,9 +6,14 @@ export const login = async (req: Request, res: Response) => {
     const { email} = req.params
     const { code } = req.body
 
-    console.log({email,code})
+    const user = await UserModel.findOne({email,login_code:code})
 
-    res.send("Login");
+    if(!user){
+        return res.status(400).json({ok:false,message:'Usurario o codigo incorrecto'})
+    }
+
+    res.cookie('jwt','mi cookie')
+    res.status(200).json({ok:true,message:'Inicio de sesión exitoso'})
 };
 
 export const generateCode = async (req: Request, res: Response) => {
