@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
 import sendEmail from "../helpers/mailer";
 import UserModel from "../models/user";
+import jwt from "jsonwebtoken"
 
 export const login = async (req: Request, res: Response) => {
     const { email} = req.params
     const { code } = req.body
+
 
     const user = await UserModel.findOne({email,login_code:code})
 
@@ -12,7 +14,20 @@ export const login = async (req: Request, res: Response) => {
         return res.status(400).json({ok:false,message:'Usurario o codigo incorrecto'})
     }
 
-    res.cookie('jwt','mi cookie')
+    const userObject = user.toObject() // convertir la instancia de user de mongoose a un objeto tipo JSON
+    
+    // genera el token con los datos a mandar la secret key
+    //                      datos               secret key
+    const token = jwt.sign({
+        sub:user._id,
+        firstName:"marlon",
+        lastName:"mosquera",
+        role: user.role,
+
+    },process.env.SECRET_KEY as string // se pone como as string, para decirle a ts que confie que es un string
+) 
+
+    res.cookie('jwt',token)
     res.status(200).json({ok:true,message:'Inicio de sesión exitoso'})
 };
 
@@ -47,5 +62,5 @@ export const generateCode = async (req: Request, res: Response) => {
 
     
 
-    res.status(200).json({ message: "Código enviado exitosamente." });
+    res.status(200).json({ message: "Código enviado exitosamente" });
 };
