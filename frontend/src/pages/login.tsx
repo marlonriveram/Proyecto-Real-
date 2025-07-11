@@ -79,6 +79,8 @@ const Login: NextPage = () => {
                     {/* isInvalid={!!errors.email}, si es true
                         activa el componente FormErrorMessage
                     */}
+        
+
                     <FormControl marginBottom={5} alignItems="center" isInvalid={!!errors.email}>
                         <FormLabel>Email</FormLabel>
                             <Input type="text" placeholder="Write your Email"
@@ -96,7 +98,7 @@ const Login: NextPage = () => {
                     </FormControl>
 
                     <FormControl marginBottom={5} alignItems="center" isInvalid={!!errors.code}>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel>code</FormLabel>
                         <Input type="number" placeholder="Write your code" 
                     
                             /*opcion 1

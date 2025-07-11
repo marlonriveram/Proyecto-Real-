@@ -21,6 +21,7 @@ export const validateUser = () => {
         try {
             console.log("Validando token")
             const token = req.cookies.jwt
+                            //     token    secrect key
             const user = jwt.verify(token, process.env.SECRET_KEY as string)
             req.user = user
             next()

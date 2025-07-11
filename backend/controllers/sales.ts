@@ -16,6 +16,7 @@ export const getAll = async (req:any , res: Response) => {
 
 export const create = async (req:any, res: Response) => {
   const { operation_date, total_amount } = req.body
+  
   const createSale = await SaleModel.create({
     operation_date,
     total_amount,
