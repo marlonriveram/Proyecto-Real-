@@ -187,7 +187,7 @@ export const ClientForm = ({ clientId }: Props) => {
                 </Fieldset.Root>
 
                 <Group mt={4}>
-                    <Button type="submit" > Crear </Button>
+                    <Button type="submit" > Guardar Cambios </Button>
                     <Button colorPalette={"purple"} onClick={() => router.back()}> volver </Button>
                 </Group>
 

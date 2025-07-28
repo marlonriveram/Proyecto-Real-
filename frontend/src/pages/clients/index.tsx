@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
 import type { NextPage } from "next"
 import { useRouter } from "next/router"
-import ClientList from "~/components/ui/entites/ClientList"
+import ClientList from "~/components/ui/entites/clients/ClientList"
 import { env } from "~/env"
 
 const ClientPage: NextPage = () => {

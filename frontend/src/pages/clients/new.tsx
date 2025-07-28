@@ -18,7 +18,8 @@ import { z } from "zod";
 import axios from "axios";
 import { env } from "~/env";
 import { useRouter } from "next/router";
-import { ClientForm } from "~/components/ui/entites/ClientForm";
+import { ClientForm } from "~/components/ui/entites/clients/ClientForm";
+
 
 
 const NewClient: NextPage = () => {

@@ -1,6 +1,6 @@
 import { Button, Card, Flex, Text } from "@chakra-ui/react"
 import { useRouter } from "next/router"
-import type { Client } from "./ClientForm"
+import type { Client } from "./clients/ClientForm"
 
 
 interface ClientFromDB extends Client {
